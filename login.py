@@ -7,7 +7,19 @@ def login():
     # when clicked, check it correct or wrong
     # if it is correct, it pops up login message
     # if it is wrong, it pops up error message
-    pass
+    username = StringVar()
+    password = StringVar()
+    info_file = open("info.pickle", "rb")
+    user_info = pickle.load(info_file)
+    for id in user_info:
+        if id == username.get():
+            if id.value() == password.get():
+                pass
+            else:
+                messagebox.showerror("Error", "Wrong password, please try again.")
+        else:
+            messagebox.showerror("Error", "No user found")
+    info_file.close()
 def createAccount():
     global username, password, createAccount_screen
     username = StringVar()
@@ -66,8 +78,8 @@ def main():
     createbtn = Button(main_screen, text="Create new account", width=30, height=2, command=createAccount)
     # display components
     id_label.pack()
-    pw_label.pack()
     id_box.pack()
+    pw_label.pack()
     pw_box.pack()
     loginbtn.pack()
     createbtn.pack()
